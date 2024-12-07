@@ -1,0 +1,853 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище МузейModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Authors">
+          <Key>
+            <PropertyRef Name="Id_Author" />
+          </Key>
+          <Property Name="Id_Author" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Conditions">
+          <Key>
+            <PropertyRef Name="Id_Condition" />
+          </Key>
+          <Property Name="Id_Condition" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Curator">
+          <Key>
+            <PropertyRef Name="Id_Curator" />
+          </Key>
+          <Property Name="Id_Curator" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_User" Type="int" />
+          <Property Name="ContactInfo" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Curator_Exhibition">
+          <Key>
+            <PropertyRef Name="Id_CuratorExhibition" />
+          </Key>
+          <Property Name="Id_CuratorExhibition" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Curator" Type="int" />
+          <Property Name="Id_Exhibition" Type="int" />
+        </EntityType>
+        <EntityType Name="Exhibit-Exhibition">
+          <Key>
+            <PropertyRef Name="Id_ExhibitExhibition" />
+          </Key>
+          <Property Name="Id_ExhibitExhibition" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Exhibit" Type="int" />
+          <Property Name="Id_Exhibition" Type="int" />
+        </EntityType>
+        <EntityType Name="Exhibitions">
+          <Key>
+            <PropertyRef Name="Id_Exhibition" />
+          </Key>
+          <Property Name="Id_Exhibition" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Exhibits">
+          <Key>
+            <PropertyRef Name="Id_Exhibit" />
+          </Key>
+          <Property Name="Id_Exhibit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreationDate" Type="date" />
+          <Property Name="Description" Type="nvarchar" MaxLength="120" Nullable="false" />
+          <Property Name="AddedDate" Type="date" />
+          <Property Name="Id_Author" Type="int" />
+          <Property Name="Id_Condition" Type="int" />
+          <Property Name="Id_Type" Type="int" />
+        </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="Id_Notification" />
+          </Key>
+          <Property Name="Id_Notification" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="300" />
+          <Property Name="Id_Exhibition" Type="int" />
+        </EntityType>
+        <EntityType Name="Reports">
+          <Key>
+            <PropertyRef Name="Id_Report" />
+          </Key>
+          <Property Name="Id_Report" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReportDate" Type="date" />
+          <Property Name="VisitorCount" Type="int" />
+          <Property Name="Revenue" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Id_Exhibition" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tickets">
+          <Key>
+            <PropertyRef Name="Id_Ticket" />
+          </Key>
+          <Property Name="Id_Ticket" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Exhibition" Type="int" />
+          <Property Name="PurchaseDate" Type="date" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Id_User" Type="int" />
+        </EntityType>
+        <EntityType Name="Types">
+          <Key>
+            <PropertyRef Name="Id_Type" />
+          </Key>
+          <Property Name="Id_Type" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id_User" />
+          </Key>
+          <Property Name="Id_User" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username_User" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="date" />
+          <Property Name="LastLogin" Type="date" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" />
+          <Property Name="DiscountCode" Type="int" />
+          <Property Name="Balance" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <Association Name="FK_Curator_Exhibition_Curator">
+          <End Role="Curator" Type="Self.Curator" Multiplicity="0..1" />
+          <End Role="Curator_Exhibition" Type="Self.Curator_Exhibition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curator">
+              <PropertyRef Name="Id_Curator" />
+            </Principal>
+            <Dependent Role="Curator_Exhibition">
+              <PropertyRef Name="Id_Curator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Curator_Exhibition_Exhibitions">
+          <End Role="Exhibitions" Type="Self.Exhibitions" Multiplicity="0..1" />
+          <End Role="Curator_Exhibition" Type="Self.Curator_Exhibition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exhibitions">
+              <PropertyRef Name="Id_Exhibition" />
+            </Principal>
+            <Dependent Role="Curator_Exhibition">
+              <PropertyRef Name="Id_Exhibition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Curator_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Curator" Type="Self.Curator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id_User" />
+            </Principal>
+            <Dependent Role="Curator">
+              <PropertyRef Name="Id_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Exhibit-Exhibition_Exhibitions">
+          <End Role="Exhibitions" Type="Self.Exhibitions" Multiplicity="0..1" />
+          <End Role="Exhibit-Exhibition" Type="Self.Exhibit-Exhibition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exhibitions">
+              <PropertyRef Name="Id_Exhibition" />
+            </Principal>
+            <Dependent Role="Exhibit-Exhibition">
+              <PropertyRef Name="Id_Exhibition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Exhibit-Exhibition_Exhibits">
+          <End Role="Exhibits" Type="Self.Exhibits" Multiplicity="0..1" />
+          <End Role="Exhibit-Exhibition" Type="Self.Exhibit-Exhibition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exhibits">
+              <PropertyRef Name="Id_Exhibit" />
+            </Principal>
+            <Dependent Role="Exhibit-Exhibition">
+              <PropertyRef Name="Id_Exhibit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Exhibits_Authors">
+          <End Role="Authors" Type="Self.Authors" Multiplicity="0..1" />
+          <End Role="Exhibits" Type="Self.Exhibits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Authors">
+              <PropertyRef Name="Id_Author" />
+            </Principal>
+            <Dependent Role="Exhibits">
+              <PropertyRef Name="Id_Author" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Exhibits_Conditions">
+          <End Role="Conditions" Type="Self.Conditions" Multiplicity="0..1" />
+          <End Role="Exhibits" Type="Self.Exhibits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conditions">
+              <PropertyRef Name="Id_Condition" />
+            </Principal>
+            <Dependent Role="Exhibits">
+              <PropertyRef Name="Id_Condition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Exhibits_Types">
+          <End Role="Types" Type="Self.Types" Multiplicity="0..1" />
+          <End Role="Exhibits" Type="Self.Exhibits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Types">
+              <PropertyRef Name="Id_Type" />
+            </Principal>
+            <Dependent Role="Exhibits">
+              <PropertyRef Name="Id_Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_Exhibitions">
+          <End Role="Exhibitions" Type="Self.Exhibitions" Multiplicity="0..1" />
+          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exhibitions">
+              <PropertyRef Name="Id_Exhibition" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="Id_Exhibition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reports_Exhibitions">
+          <End Role="Exhibitions" Type="Self.Exhibitions" Multiplicity="0..1" />
+          <End Role="Reports" Type="Self.Reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exhibitions">
+              <PropertyRef Name="Id_Exhibition" />
+            </Principal>
+            <Dependent Role="Reports">
+              <PropertyRef Name="Id_Exhibition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tickets_Exhibitions">
+          <End Role="Exhibitions" Type="Self.Exhibitions" Multiplicity="0..1" />
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exhibitions">
+              <PropertyRef Name="Id_Exhibition" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="Id_Exhibition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tickets_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id_User" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="Id_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище МузейModelContainer">
+          <EntitySet Name="Authors" EntityType="Self.Authors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Conditions" EntityType="Self.Conditions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Curator" EntityType="Self.Curator" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Curator_Exhibition" EntityType="Self.Curator_Exhibition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Exhibit-Exhibition" EntityType="Self.Exhibit-Exhibition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Exhibitions" EntityType="Self.Exhibitions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Exhibits" EntityType="Self.Exhibits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reports" EntityType="Self.Reports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tickets" EntityType="Self.Tickets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Types" EntityType="Self.Types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Curator_Exhibition_Curator" Association="Self.FK_Curator_Exhibition_Curator">
+            <End Role="Curator" EntitySet="Curator" />
+            <End Role="Curator_Exhibition" EntitySet="Curator_Exhibition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Curator_Exhibition_Exhibitions" Association="Self.FK_Curator_Exhibition_Exhibitions">
+            <End Role="Exhibitions" EntitySet="Exhibitions" />
+            <End Role="Curator_Exhibition" EntitySet="Curator_Exhibition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Curator_User" Association="Self.FK_Curator_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Curator" EntitySet="Curator" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Exhibit-Exhibition_Exhibitions" Association="Self.FK_Exhibit-Exhibition_Exhibitions">
+            <End Role="Exhibitions" EntitySet="Exhibitions" />
+            <End Role="Exhibit-Exhibition" EntitySet="Exhibit-Exhibition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Exhibit-Exhibition_Exhibits" Association="Self.FK_Exhibit-Exhibition_Exhibits">
+            <End Role="Exhibits" EntitySet="Exhibits" />
+            <End Role="Exhibit-Exhibition" EntitySet="Exhibit-Exhibition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Exhibits_Authors" Association="Self.FK_Exhibits_Authors">
+            <End Role="Authors" EntitySet="Authors" />
+            <End Role="Exhibits" EntitySet="Exhibits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Exhibits_Conditions" Association="Self.FK_Exhibits_Conditions">
+            <End Role="Conditions" EntitySet="Conditions" />
+            <End Role="Exhibits" EntitySet="Exhibits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Exhibits_Types" Association="Self.FK_Exhibits_Types">
+            <End Role="Types" EntitySet="Types" />
+            <End Role="Exhibits" EntitySet="Exhibits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_Exhibitions" Association="Self.FK_Notifications_Exhibitions">
+            <End Role="Exhibitions" EntitySet="Exhibitions" />
+            <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reports_Exhibitions" Association="Self.FK_Reports_Exhibitions">
+            <End Role="Exhibitions" EntitySet="Exhibitions" />
+            <End Role="Reports" EntitySet="Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tickets_Exhibitions" Association="Self.FK_Tickets_Exhibitions">
+            <End Role="Exhibitions" EntitySet="Exhibitions" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tickets_User" Association="Self.FK_Tickets_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="МузейModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Authors">
+          <Key>
+            <PropertyRef Name="Id_Author" />
+          </Key>
+          <Property Name="Id_Author" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Exhibits" Relationship="Self.FK_Exhibits_Authors" FromRole="Authors" ToRole="Exhibits" />
+        </EntityType>
+        <EntityType Name="Conditions">
+          <Key>
+            <PropertyRef Name="Id_Condition" />
+          </Key>
+          <Property Name="Id_Condition" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Exhibits" Relationship="Self.FK_Exhibits_Conditions" FromRole="Conditions" ToRole="Exhibits" />
+        </EntityType>
+        <EntityType Name="Curator">
+          <Key>
+            <PropertyRef Name="Id_Curator" />
+          </Key>
+          <Property Name="Id_Curator" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_User" Type="Int32" />
+          <Property Name="ContactInfo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Curator_Exhibition" Relationship="Self.FK_Curator_Exhibition_Curator" FromRole="Curator" ToRole="Curator_Exhibition" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Curator_User" FromRole="Curator" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Curator_Exhibition">
+          <Key>
+            <PropertyRef Name="Id_CuratorExhibition" />
+          </Key>
+          <Property Name="Id_CuratorExhibition" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Curator" Type="Int32" />
+          <Property Name="Id_Exhibition" Type="Int32" />
+          <NavigationProperty Name="Curator" Relationship="Self.FK_Curator_Exhibition_Curator" FromRole="Curator_Exhibition" ToRole="Curator" />
+          <NavigationProperty Name="Exhibitions" Relationship="Self.FK_Curator_Exhibition_Exhibitions" FromRole="Curator_Exhibition" ToRole="Exhibitions" />
+        </EntityType>
+        <EntityType Name="Exhibit_Exhibition">
+          <Key>
+            <PropertyRef Name="Id_ExhibitExhibition" />
+          </Key>
+          <Property Name="Id_ExhibitExhibition" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Exhibit" Type="Int32" />
+          <Property Name="Id_Exhibition" Type="Int32" />
+          <NavigationProperty Name="Exhibitions" Relationship="Self.FK_Exhibit_Exhibition_Exhibitions" FromRole="Exhibit_Exhibition" ToRole="Exhibitions" />
+          <NavigationProperty Name="Exhibits" Relationship="Self.FK_Exhibit_Exhibition_Exhibits" FromRole="Exhibit_Exhibition" ToRole="Exhibits" />
+        </EntityType>
+        <EntityType Name="Exhibitions">
+          <Key>
+            <PropertyRef Name="Id_Exhibition" />
+          </Key>
+          <Property Name="Id_Exhibition" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Curator_Exhibition" Relationship="Self.FK_Curator_Exhibition_Exhibitions" FromRole="Exhibitions" ToRole="Curator_Exhibition" />
+          <NavigationProperty Name="Exhibit_Exhibition" Relationship="Self.FK_Exhibit_Exhibition_Exhibitions" FromRole="Exhibitions" ToRole="Exhibit_Exhibition" />
+          <NavigationProperty Name="Notifications" Relationship="Self.FK_Notifications_Exhibitions" FromRole="Exhibitions" ToRole="Notifications" />
+          <NavigationProperty Name="Reports" Relationship="Self.FK_Reports_Exhibitions" FromRole="Exhibitions" ToRole="Reports" />
+          <NavigationProperty Name="Tickets" Relationship="Self.FK_Tickets_Exhibitions" FromRole="Exhibitions" ToRole="Tickets" />
+        </EntityType>
+        <EntityType Name="Exhibits">
+          <Key>
+            <PropertyRef Name="Id_Exhibit" />
+          </Key>
+          <Property Name="Id_Exhibit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreationDate" Type="DateTime" Precision="0" />
+          <Property Name="Description" Type="String" MaxLength="120" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AddedDate" Type="DateTime" Precision="0" />
+          <Property Name="Id_Author" Type="Int32" />
+          <Property Name="Id_Condition" Type="Int32" />
+          <Property Name="Id_Type" Type="Int32" />
+          <NavigationProperty Name="Authors" Relationship="Self.FK_Exhibits_Authors" FromRole="Exhibits" ToRole="Authors" />
+          <NavigationProperty Name="Conditions" Relationship="Self.FK_Exhibits_Conditions" FromRole="Exhibits" ToRole="Conditions" />
+          <NavigationProperty Name="Exhibit_Exhibition" Relationship="Self.FK_Exhibit_Exhibition_Exhibits" FromRole="Exhibits" ToRole="Exhibit_Exhibition" />
+          <NavigationProperty Name="Types" Relationship="Self.FK_Exhibits_Types" FromRole="Exhibits" ToRole="Types" />
+        </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="Id_Notification" />
+          </Key>
+          <Property Name="Id_Notification" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Id_Exhibition" Type="Int32" />
+          <NavigationProperty Name="Exhibitions" Relationship="Self.FK_Notifications_Exhibitions" FromRole="Notifications" ToRole="Exhibitions" />
+        </EntityType>
+        <EntityType Name="Reports">
+          <Key>
+            <PropertyRef Name="Id_Report" />
+          </Key>
+          <Property Name="Id_Report" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReportDate" Type="DateTime" Precision="0" />
+          <Property Name="VisitorCount" Type="Int32" />
+          <Property Name="Revenue" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Id_Exhibition" Type="Int32" />
+          <NavigationProperty Name="Exhibitions" Relationship="Self.FK_Reports_Exhibitions" FromRole="Reports" ToRole="Exhibitions" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tickets">
+          <Key>
+            <PropertyRef Name="Id_Ticket" />
+          </Key>
+          <Property Name="Id_Ticket" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Exhibition" Type="Int32" />
+          <Property Name="PurchaseDate" Type="DateTime" Precision="0" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Id_User" Type="Int32" />
+          <NavigationProperty Name="Exhibitions" Relationship="Self.FK_Tickets_Exhibitions" FromRole="Tickets" ToRole="Exhibitions" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Tickets_User" FromRole="Tickets" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Types">
+          <Key>
+            <PropertyRef Name="Id_Type" />
+          </Key>
+          <Property Name="Id_Type" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Exhibits" Relationship="Self.FK_Exhibits_Types" FromRole="Types" ToRole="Exhibits" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id_User" />
+          </Key>
+          <Property Name="Id_User" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username_User" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+          <Property Name="LastLogin" Type="DateTime" Precision="0" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiscountCode" Type="Int32" />
+          <Property Name="Balance" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Curator" Relationship="Self.FK_Curator_User" FromRole="User" ToRole="Curator" />
+          <NavigationProperty Name="Tickets" Relationship="Self.FK_Tickets_User" FromRole="User" ToRole="Tickets" />
+        </EntityType>
+        <Association Name="FK_Exhibits_Authors">
+          <End Role="Authors" Type="Self.Authors" Multiplicity="0..1" />
+          <End Role="Exhibits" Type="Self.Exhibits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Authors">
+              <PropertyRef Name="Id_Author" />
+            </Principal>
+            <Dependent Role="Exhibits">
+              <PropertyRef Name="Id_Author" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Exhibits_Conditions">
+          <End Role="Conditions" Type="Self.Conditions" Multiplicity="0..1" />
+          <End Role="Exhibits" Type="Self.Exhibits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conditions">
+              <PropertyRef Name="Id_Condition" />
+            </Principal>
+            <Dependent Role="Exhibits">
+              <PropertyRef Name="Id_Condition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Curator_Exhibition_Curator">
+          <End Role="Curator" Type="Self.Curator" Multiplicity="0..1" />
+          <End Role="Curator_Exhibition" Type="Self.Curator_Exhibition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curator">
+              <PropertyRef Name="Id_Curator" />
+            </Principal>
+            <Dependent Role="Curator_Exhibition">
+              <PropertyRef Name="Id_Curator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Curator_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Curator" Type="Self.Curator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id_User" />
+            </Principal>
+            <Dependent Role="Curator">
+              <PropertyRef Name="Id_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Curator_Exhibition_Exhibitions">
+          <End Role="Exhibitions" Type="Self.Exhibitions" Multiplicity="0..1" />
+          <End Role="Curator_Exhibition" Type="Self.Curator_Exhibition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exhibitions">
+              <PropertyRef Name="Id_Exhibition" />
+            </Principal>
+            <Dependent Role="Curator_Exhibition">
+              <PropertyRef Name="Id_Exhibition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Exhibit_Exhibition_Exhibitions">
+          <End Role="Exhibitions" Type="Self.Exhibitions" Multiplicity="0..1" />
+          <End Role="Exhibit_Exhibition" Type="Self.Exhibit_Exhibition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exhibitions">
+              <PropertyRef Name="Id_Exhibition" />
+            </Principal>
+            <Dependent Role="Exhibit_Exhibition">
+              <PropertyRef Name="Id_Exhibition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Exhibit_Exhibition_Exhibits">
+          <End Role="Exhibits" Type="Self.Exhibits" Multiplicity="0..1" />
+          <End Role="Exhibit_Exhibition" Type="Self.Exhibit_Exhibition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exhibits">
+              <PropertyRef Name="Id_Exhibit" />
+            </Principal>
+            <Dependent Role="Exhibit_Exhibition">
+              <PropertyRef Name="Id_Exhibit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_Exhibitions">
+          <End Role="Exhibitions" Type="Self.Exhibitions" Multiplicity="0..1" />
+          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exhibitions">
+              <PropertyRef Name="Id_Exhibition" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="Id_Exhibition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reports_Exhibitions">
+          <End Role="Exhibitions" Type="Self.Exhibitions" Multiplicity="0..1" />
+          <End Role="Reports" Type="Self.Reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exhibitions">
+              <PropertyRef Name="Id_Exhibition" />
+            </Principal>
+            <Dependent Role="Reports">
+              <PropertyRef Name="Id_Exhibition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tickets_Exhibitions">
+          <End Role="Exhibitions" Type="Self.Exhibitions" Multiplicity="0..1" />
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exhibitions">
+              <PropertyRef Name="Id_Exhibition" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="Id_Exhibition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Exhibits_Types">
+          <End Role="Types" Type="Self.Types" Multiplicity="0..1" />
+          <End Role="Exhibits" Type="Self.Exhibits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Types">
+              <PropertyRef Name="Id_Type" />
+            </Principal>
+            <Dependent Role="Exhibits">
+              <PropertyRef Name="Id_Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tickets_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id_User" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="Id_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="МузейEntities11" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Authors" EntityType="Self.Authors" />
+          <EntitySet Name="Conditions" EntityType="Self.Conditions" />
+          <EntitySet Name="Curator" EntityType="Self.Curator" />
+          <EntitySet Name="Curator_Exhibition" EntityType="Self.Curator_Exhibition" />
+          <EntitySet Name="Exhibit_Exhibition" EntityType="Self.Exhibit_Exhibition" />
+          <EntitySet Name="Exhibitions" EntityType="Self.Exhibitions" />
+          <EntitySet Name="Exhibits" EntityType="Self.Exhibits" />
+          <EntitySet Name="Notifications" EntityType="Self.Notifications" />
+          <EntitySet Name="Reports" EntityType="Self.Reports" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Tickets" EntityType="Self.Tickets" />
+          <EntitySet Name="Types" EntityType="Self.Types" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_Exhibits_Authors" Association="Self.FK_Exhibits_Authors">
+            <End Role="Authors" EntitySet="Authors" />
+            <End Role="Exhibits" EntitySet="Exhibits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Exhibits_Conditions" Association="Self.FK_Exhibits_Conditions">
+            <End Role="Conditions" EntitySet="Conditions" />
+            <End Role="Exhibits" EntitySet="Exhibits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Curator_Exhibition_Curator" Association="Self.FK_Curator_Exhibition_Curator">
+            <End Role="Curator" EntitySet="Curator" />
+            <End Role="Curator_Exhibition" EntitySet="Curator_Exhibition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Curator_User" Association="Self.FK_Curator_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Curator" EntitySet="Curator" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Curator_Exhibition_Exhibitions" Association="Self.FK_Curator_Exhibition_Exhibitions">
+            <End Role="Exhibitions" EntitySet="Exhibitions" />
+            <End Role="Curator_Exhibition" EntitySet="Curator_Exhibition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Exhibit_Exhibition_Exhibitions" Association="Self.FK_Exhibit_Exhibition_Exhibitions">
+            <End Role="Exhibitions" EntitySet="Exhibitions" />
+            <End Role="Exhibit_Exhibition" EntitySet="Exhibit_Exhibition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Exhibit_Exhibition_Exhibits" Association="Self.FK_Exhibit_Exhibition_Exhibits">
+            <End Role="Exhibits" EntitySet="Exhibits" />
+            <End Role="Exhibit_Exhibition" EntitySet="Exhibit_Exhibition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_Exhibitions" Association="Self.FK_Notifications_Exhibitions">
+            <End Role="Exhibitions" EntitySet="Exhibitions" />
+            <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reports_Exhibitions" Association="Self.FK_Reports_Exhibitions">
+            <End Role="Exhibitions" EntitySet="Exhibitions" />
+            <End Role="Reports" EntitySet="Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tickets_Exhibitions" Association="Self.FK_Tickets_Exhibitions">
+            <End Role="Exhibitions" EntitySet="Exhibitions" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Exhibits_Types" Association="Self.FK_Exhibits_Types">
+            <End Role="Types" EntitySet="Types" />
+            <End Role="Exhibits" EntitySet="Exhibits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tickets_User" Association="Self.FK_Tickets_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище МузейModelContainer" CdmEntityContainer="МузейEntities11">
+          <EntitySetMapping Name="Authors">
+            <EntityTypeMapping TypeName="МузейModel.Authors">
+              <MappingFragment StoreEntitySet="Authors">
+                <ScalarProperty Name="Id_Author" ColumnName="Id_Author" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Conditions">
+            <EntityTypeMapping TypeName="МузейModel.Conditions">
+              <MappingFragment StoreEntitySet="Conditions">
+                <ScalarProperty Name="Id_Condition" ColumnName="Id_Condition" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Curator">
+            <EntityTypeMapping TypeName="МузейModel.Curator">
+              <MappingFragment StoreEntitySet="Curator">
+                <ScalarProperty Name="Id_Curator" ColumnName="Id_Curator" />
+                <ScalarProperty Name="Id_User" ColumnName="Id_User" />
+                <ScalarProperty Name="ContactInfo" ColumnName="ContactInfo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Curator_Exhibition">
+            <EntityTypeMapping TypeName="МузейModel.Curator_Exhibition">
+              <MappingFragment StoreEntitySet="Curator_Exhibition">
+                <ScalarProperty Name="Id_CuratorExhibition" ColumnName="Id_CuratorExhibition" />
+                <ScalarProperty Name="Id_Curator" ColumnName="Id_Curator" />
+                <ScalarProperty Name="Id_Exhibition" ColumnName="Id_Exhibition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Exhibit_Exhibition">
+            <EntityTypeMapping TypeName="МузейModel.Exhibit_Exhibition">
+              <MappingFragment StoreEntitySet="Exhibit-Exhibition">
+                <ScalarProperty Name="Id_ExhibitExhibition" ColumnName="Id_ExhibitExhibition" />
+                <ScalarProperty Name="Id_Exhibit" ColumnName="Id_Exhibit" />
+                <ScalarProperty Name="Id_Exhibition" ColumnName="Id_Exhibition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Exhibitions">
+            <EntityTypeMapping TypeName="МузейModel.Exhibitions">
+              <MappingFragment StoreEntitySet="Exhibitions">
+                <ScalarProperty Name="Id_Exhibition" ColumnName="Id_Exhibition" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Exhibits">
+            <EntityTypeMapping TypeName="МузейModel.Exhibits">
+              <MappingFragment StoreEntitySet="Exhibits">
+                <ScalarProperty Name="Id_Exhibit" ColumnName="Id_Exhibit" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="Id_Author" ColumnName="Id_Author" />
+                <ScalarProperty Name="Id_Condition" ColumnName="Id_Condition" />
+                <ScalarProperty Name="Id_Type" ColumnName="Id_Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="МузейModel.Notifications">
+              <MappingFragment StoreEntitySet="Notifications">
+                <ScalarProperty Name="Id_Notification" ColumnName="Id_Notification" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Id_Exhibition" ColumnName="Id_Exhibition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reports">
+            <EntityTypeMapping TypeName="МузейModel.Reports">
+              <MappingFragment StoreEntitySet="Reports">
+                <ScalarProperty Name="Id_Report" ColumnName="Id_Report" />
+                <ScalarProperty Name="ReportDate" ColumnName="ReportDate" />
+                <ScalarProperty Name="VisitorCount" ColumnName="VisitorCount" />
+                <ScalarProperty Name="Revenue" ColumnName="Revenue" />
+                <ScalarProperty Name="Id_Exhibition" ColumnName="Id_Exhibition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="МузейModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tickets">
+            <EntityTypeMapping TypeName="МузейModel.Tickets">
+              <MappingFragment StoreEntitySet="Tickets">
+                <ScalarProperty Name="Id_Ticket" ColumnName="Id_Ticket" />
+                <ScalarProperty Name="Id_Exhibition" ColumnName="Id_Exhibition" />
+                <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Id_User" ColumnName="Id_User" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Types">
+            <EntityTypeMapping TypeName="МузейModel.Types">
+              <MappingFragment StoreEntitySet="Types">
+                <ScalarProperty Name="Id_Type" ColumnName="Id_Type" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="МузейModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id_User" ColumnName="Id_User" />
+                <ScalarProperty Name="Username_User" ColumnName="Username_User" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="DiscountCode" ColumnName="DiscountCode" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

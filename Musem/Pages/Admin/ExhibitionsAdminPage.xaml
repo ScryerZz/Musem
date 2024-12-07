@@ -1,0 +1,63 @@
+﻿<Page x:Class="Musem.Pages.Admin.ExhibitionsAdminPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Musem.Pages.Admin"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" 
+      mc:Ignorable="d" 
+      d:DesignHeight="745" d:DesignWidth="1535"
+      Title="ExhibitionsAdminPage">
+
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Content="Выставки" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="28" Margin="106,15,0,0"/>
+        <ui:ListView x:Name="ListExibits" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Margin="0,124,360,30" Grid.ColumnSpan="2" FontSize="16" SelectionChanged="ListExibits_SelectionChanged" Grid.Column="1" Grid.RowSpan="3" RenderTransformOrigin="0.5,0.5" >
+            <ui:ListView.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="0.113"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="0.224"/>
+                </TransformGroup>
+            </ui:ListView.RenderTransform>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Title}" Width="150" Header="Название"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding StartDate}" Width="150" Header="Дата начала"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding EndDate}" Width="235" Header="Дата окончания"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Description}" Width="120" Header="Описание"/>
+                </GridView>
+            </ListView.View>
+        </ui:ListView>
+        <ui:Button x:Name="CreateAuthor" Content="Создать" Margin="100,1,0,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30" Width="150" FontSize="14" Click="CreateAuthor_Click"/>
+        <Label Content="Выставки" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Margin="100,0,0,0" Grid.Row="1"/>
+        <ui:Button x:Name="DeleteExhibition" Content="Удалить" HorizontalAlignment="Left" Margin="100,91,0,0" Grid.Row="2" VerticalAlignment="Top" Height="30" Width="150" FontSize="14" Click="DeleteExhibitionBtn_Click"/>
+        <ui:Button x:Name="EditExhibition" Content="Редактировать" HorizontalAlignment="Left" Margin="100,45,0,0" Grid.Row="2" VerticalAlignment="Top" Height="30" Width="150" FontSize="14" Click="EditExibit_Click"/>
+        <Button Content="Добавить куратора" Click="AddCuratorBtn_Click" Width="150" Margin="100,1,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="4" FontSize="14" Height="30"/>
+        <ListView x:Name="CuratorsListView" Margin="0,124,5,30"  Grid.RowSpan="3" Grid.Row="2" Grid.Column="1" FontSize="16">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id_Curator}" Width="50"/>
+                    <GridViewColumn Header="Id пользователя" DisplayMemberBinding="{Binding Username}" Width="150"/>
+                    <GridViewColumn Header="Контактная информация" DisplayMemberBinding="{Binding ContactInfo}" Width="300"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Редактировать" Click="EditCuratorBtn_Click" Margin="100,45,0,0" Width="150" Grid.Row="4" FontSize="14" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Button Content="Удалить" Click="DeleteCuratorBtn_Click" Margin="100,91,0,0" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30" Grid.Row="4" FontSize="14"/>
+        <Label Content="Кураторы" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Margin="100,0,0,0" Grid.Row="3"/>
+    </Grid>
+</Page>

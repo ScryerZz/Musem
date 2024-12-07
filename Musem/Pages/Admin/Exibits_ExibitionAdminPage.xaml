@@ -1,0 +1,40 @@
+﻿<Page x:Class="Musem.Pages.Admin.Exibits_ExibitionAdminPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Musem.Pages.Admin"
+      mc:Ignorable="d" 
+        d:DesignHeight="745" d:DesignWidth="1535"
+      Title="Exibits_ExibitionAdminPage">
+
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" MinWidth="153"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="Выберите экспонат:" Margin="0,0,0,32" Grid.RowSpan="2"/>
+        <ComboBox x:Name="ExhibitComboBox" Grid.Row="0" Grid.Column="1" Margin="5,5,5,5"/>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Выберите выставку:" Margin="0,0,0,13" Grid.RowSpan="2"/>
+        <ComboBox x:Name="ExhibitionComboBox" Grid.Row="1" Grid.Column="1" Margin="5,5,5,5" SelectionChanged="ExhibitionComboBox_SelectionChanged"/>
+
+        <Label Grid.Row="3" Grid.Column="0" Content="Экспонаты на выставке:" Margin="5,5,0,453"/>
+        <ListView x:Name="ExhibitListView" Grid.Row="3" Grid.Column="1" Margin="5,10,10,270"/>
+
+        <Button x:Name="AddButton" Grid.Row="3" Grid.Column="1" Content="Добавить" Margin="5,223,10,223" Click="AddButton_Click"/>
+        <Button x:Name="RemoveButton" Grid.Row="3" Grid.Column="0" Content="Удалить" Margin="5,228,5,223" Click="RemoveButton_Click"/>
+        <TextBlock x:Name="StatusTextBlock" Grid.Row="4" Grid.ColumnSpan="2" Margin="5,5,5,5" Foreground="Red"/>
+    </Grid>
+</Page>

@@ -1,0 +1,20 @@
+﻿<Window x:Class="Musem.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Musem"
+        WindowStyle="None"
+        WindowState="Maximized" 
+        
+        mc:Ignorable="d"
+        Title="MainWindow" Height="865" Width="1535">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Frame x:Name="FrameNavBar_" NavigationUIVisibility="Hidden" Height="120"/>
+        <Frame x:Name="FrameMain" Content="FrameMain" NavigationUIVisibility="Hidden" Grid.Row="1"/>
+    </Grid>
+</Window>

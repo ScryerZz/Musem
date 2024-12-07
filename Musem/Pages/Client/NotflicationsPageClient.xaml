@@ -1,0 +1,39 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Musem.Pages.Client"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" x:Class="Musem.Pages.Client.NotflicationsPageClient"
+      mc:Ignorable="d" 
+      d:DesignHeight="745" d:DesignWidth="1535"
+      Title="NotflicationsPageClient">
+
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <ui:ListView x:Name="Notifications" Grid.Row="1" Margin="156,10,87,0" Grid.ColumnSpan="3" Grid.RowSpan="3" FontSize="24">
+            <ui:ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id_Notification}" Width="50"/>
+                    <GridViewColumn Header="Text" DisplayMemberBinding="{Binding Text}" Width="1500"/>
+                </GridView>
+            </ui:ListView.View>
+        </ui:ListView>
+
+    </Grid>
+</Page>

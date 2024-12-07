@@ -1,0 +1,58 @@
+﻿<Page x:Class="Musem.Pages.RegistrationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Musem.Pages"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      mc:Ignorable="d" 
+      d:DesignHeight="745" d:DesignWidth="1535"   
+      Title="RegistrationPage" FontFamily="Montserrat">
+
+    <Grid Background="White" Margin="0,9,0,-9">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ui:TextBox Name="txtName" TextWrapping="Wrap" Text="" VerticalAlignment="Top" BorderThickness="0,0,0,1" Height="40" Width="511" Grid.Column="1" Grid.Row="2" FontSize="24" Margin="0,25,0,0" HorizontalAlignment="Center"/>
+        <ui:TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" FontSize="32" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1">
+            <Run Language="ru-ru" Text="РЕГИСТРАЦИЯ"/>
+        </ui:TextBlock>
+        <ui:TextBlock TextWrapping="Wrap" FontSize="20" VerticalAlignment="Top" Grid.Column="1" Height="20" Width="511" Grid.Row="2" Margin="0,0,0,0" Text="Username:" HorizontalAlignment="Center"/>
+        <ui:TextBlock TextWrapping="Wrap" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" Height="20" Width="511" Grid.Row="4" Text="Password:" Grid.Column="1">
+            <ui:TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ui:TextBlock.RenderTransform>
+        </ui:TextBlock>
+        <ui:Button Name="buttReg" Content="РЕГИСТРАЦИЯ" Margin="0,20,0,0" Foreground="White" Background="#FF2C2C68" Grid.Column="1" Grid.Row="5" Click="buttReg_Click" HorizontalAlignment="Center" Width="300" Height="40" VerticalAlignment="Top" />
+        <ui:Button Name="buttLogin" Margin="0,70,0,0" Background="{x:Null}" BorderThickness="0" Foreground="Blue" FontWeight="Bold" Click="buttLogin_Click" Grid.Row="5" Grid.Column="1" Height="15" VerticalAlignment="Top" HorizontalAlignment="Center" Width="60" >
+            <UIElement.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </UIElement.RenderTransform>
+            <TextBlock TextDecorations="Underline" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF2C2C68" ><Run Text="В"/><Run Language="ru-ru" Text="ХОД"/></TextBlock>
+        </ui:Button>
+        <ui:TextBlock TextWrapping="Wrap" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="3" Height="20" Width="511" Text="Email:" Margin="0,0,0,0" Grid.Column="1"/>
+        <ui:TextBox Name="txtEmail" TextWrapping="Wrap" Text="" VerticalAlignment="Top" HorizontalAlignment="Center" Height="40" Width="511" BorderThickness="0,0,0,1" Grid.Row="3" Grid.Column="1" FontSize="24" Margin="0,25,0,0"/>
+        <ui:TextBox x:Name="txtPass" TextWrapping="Wrap" Text="" VerticalAlignment="Top" HorizontalAlignment="Center" Height="40" Width="511" BorderThickness="0,0,0,1" Grid.Row="4" FontSize="24" Margin="0,25,0,0" Grid.Column="1"/>
+    </Grid>
+</Page>
